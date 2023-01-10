@@ -63,7 +63,7 @@ Alternatively, to install from source and create an executable program in Linux,
     cd ~/PyRate
     python3 setup.py install
 
-It is also possible (and for MacOS recommended) to use Conda for installation of the base dependencies:
+It is also possible (and for MacOS recommended) to use Conda for installation of the base dependencies::
 
     cd ~
     git clone https://github.com/markusuwe/PyRate.git
