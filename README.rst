@@ -26,7 +26,7 @@ Dependencies
 The following system dependencies are required by PyRate:
 
 - `Python <https://www.python.org/downloads/>`_, versions 3.7, 3.8 or 3.9.
-- `GDAL <https://gdal.org/download.html>`_, versions 3.0.2 or 3.0.4
+- `GDAL <https://gdal.org/download.html>`_, versions 3.*
 
 The following optional dependency is required for MPI processing capability:
 
@@ -62,6 +62,15 @@ Alternatively, to install from source and create an executable program in Linux,
     source ~/PyRateVenv/bin/activate
     cd ~/PyRate
     python3 setup.py install
+
+It is also possible (and for MacOS recommended) to use Conda for installation of the base dependencies:
+
+    cd ~
+    git clone https://github.com/markusuwe/PyRate.git
+    conda create --name pyrate python=3.9
+    conda install gdal
+    conda install numpy
+    python setup.py install
 
 This will install the above-listed Python dependencies and compile the executable program ``pyrate``.
 To learn more about using PyRate, type ``pyrate`` command in the terminal::
