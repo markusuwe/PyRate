@@ -17,7 +17,7 @@
 import resource
 from collections import namedtuple
 from typing import List, Dict, Tuple, Any
-from nptyping import NDArray, Float32, UInt16
+from nptyping import NDArray, Float32, UInt16, Shape
 import numpy as np
 
 import pyrate.constants as C
@@ -62,7 +62,7 @@ def __create_ifg_edge_dict(ifg_files: List[str], params: dict) -> Dict[Edge, Ind
 
 
 def sum_phase_closures(ifg_files: List[str], loops: List[WeightedLoop], params: dict) -> \
-        Tuple[NDArray[(Any, Any, Any), Float32], NDArray[(Any, Any, Any), UInt16], NDArray[(Any,), UInt16]]:
+        Tuple[NDArray[Shape["*, *, *"], Float32], NDArray[Shape["*, *, *"], UInt16], NDArray[Shape["*"], UInt16]]:
     """
     Compute the closure sum for each pixel in each loop, and count the number of times a pixel
     contributes to a failed closure loop (where the summed closure is above/below the 
@@ -144,7 +144,7 @@ def sum_phase_closures(ifg_files: List[str], loops: List[WeightedLoop], params: 
 
 def _find_num_occurrences_each_ifg(loops: List[WeightedLoop],
                                    edge_to_indexed_ifgs: Dict[Edge, IndexedIfg],
-                                   n_ifgs: int) -> NDArray[(Any,), UInt16]:
+                                   n_ifgs: int) -> NDArray[Shape["*"], UInt16]:
     """find how many times each ifg appears in total in all loops"""
     num_occurrences_each_ifg = np.zeros(shape=n_ifgs, dtype=np.uint16)
     for weighted_loop in loops:
@@ -157,7 +157,7 @@ def _find_num_occurrences_each_ifg(loops: List[WeightedLoop],
 
 def __compute_ifgs_breach_count(weighted_loop: WeightedLoop,
                                 edge_to_indexed_ifgs: Dict[Edge, IndexedIfg], params: dict) \
-        -> Tuple[NDArray[(Any, Any), Float32], NDArray[(Any, Any, Any), UInt16]]:
+        -> Tuple[NDArray[Shape["*, *"], Float32], NDArray[Shape["*, *, *"], UInt16]]:
     """Compute summed `closure` of each loop, and compute `ifgs_breach_count` for each pixel."""
     n_ifgs = len(edge_to_indexed_ifgs)
     indexed_ifg = list(edge_to_indexed_ifgs.values())[0]

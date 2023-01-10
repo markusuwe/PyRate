@@ -16,7 +16,7 @@
 
 from collections import defaultdict
 from typing import List, Dict, Tuple, Any
-from nptyping import NDArray, UInt16, Float32
+from nptyping import NDArray, UInt16, Float32, Shape
 import numpy as np
 
 import pyrate.constants as C
@@ -29,8 +29,8 @@ from pyrate.core.shared import Ifg, nan_and_mm_convert
 from pyrate.core.logger import pyratelogger as log
 
 
-def mask_pixels_with_unwrapping_errors(ifgs_breach_count: NDArray[(Any, Any, Any), UInt16],
-                                       num_occurrences_each_ifg: NDArray[(Any,), UInt16],
+def mask_pixels_with_unwrapping_errors(ifgs_breach_count: NDArray[Shape["*, *, *"], UInt16],
+                                       num_occurrences_each_ifg: NDArray[Shape["*, *"], UInt16],
                                        params: dict) -> None:
     """
     Find pixels in the phase data that breach closure_thr, and mask
@@ -111,7 +111,7 @@ def __drop_ifgs_exceeding_threshold(orig_ifg_files: List[str], ifgs_breach_count
 
 
 def iterative_closure_check(config, interactive_plot=True) -> \
-        Tuple[List[str], NDArray[(Any, Any, Any), UInt16], NDArray[(Any,), UInt16]]:
+        Tuple[List[str], NDArray[Shape["*, *, *"], UInt16], NDArray[Shape["*"], UInt16]]:
     """
     This function iterates the closure check until a stable list of interferogram files is returned.
     :param config: Configuration class instance
@@ -169,9 +169,9 @@ def discard_loops_containing_max_ifg_count(loops: List[WeightedLoop], params) ->
 def __wrap_closure_check(config: Configuration) -> \
         Tuple[
             List[str],
-            NDArray[(Any, Any), Float32],
-            NDArray[(Any, Any, Any), UInt16],
-            NDArray[(Any,), UInt16],
+            NDArray[Shape["*, *"], Float32],
+            NDArray[Shape["*, *, *"], UInt16],
+            NDArray[Shape["*"], UInt16],
             List[WeightedLoop]]:
     """
     This wrapper function returns the closure check outputs for a single iteration of closure check.
