@@ -30,14 +30,14 @@ The following system dependencies are required by PyRate:
 
 The following optional dependency is required for MPI processing capability:
 
-- `Open MPI <https://www.open-mpi.org/software/ompi/v4.0/>`_, versions 3.0.4, 3.1.4 or 4.0.2 (untested)
+- `Open MPI <https://www.open-mpi.org/software/ompi/v4.0/>`_, version 4.1.4
 
 The versions of each package stated above have been tested to work using `GitHub Actions <https://github.com/GeoscienceAustralia/PyRate/actions>`_ continuous integration testing.
 
 Python dependencies for PyRate are::
 
     joblib==1.2.0
-    mpi4py==3.1.3
+    mpi4py==3.1.4
     networkx==3.0
     numpy==1.23.5
     pyproj==3.4.1
